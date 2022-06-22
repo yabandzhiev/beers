@@ -6,6 +6,7 @@ const BeerItem = ({ data }) => {
     <div className="beer-item">
       <img className="beer-item__image" src={image_url} alt="Beer Image" />
       <div className="beer-item__info">
+        <span>&#x2605;&#x2606;</span>
         <h4 className="beer-item__info--title">{name}</h4>
         <p className="beer-item__info--description">{description}</p>
       </div>
