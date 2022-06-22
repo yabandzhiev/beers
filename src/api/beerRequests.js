@@ -17,3 +17,5 @@ const getRandomBeerRequest = async () => {
     console.log(error.message);
   }
 };
+
+export { getAllBeersRequest, getRandomBeerRequest };
