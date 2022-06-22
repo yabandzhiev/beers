@@ -27,8 +27,13 @@ const Home = () => {
   return (
     <div className="home">
       <div className="search">
-        <input type="text" name="search" />
-        <button>Search</button>
+        <input
+          type="text"
+          name="search"
+          className="input"
+          placeholder="Search for a beer..."
+        />
+        <button className="button">Search</button>
       </div>
 
       <div className="content">
