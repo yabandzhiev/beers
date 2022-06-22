@@ -1,0 +1,28 @@
+.beer-item {
+  display: flex;
+  max-width: 15em;
+  min-width: 15em;
+  border: 1px solid cyan;
+  border-radius: 3%;
+  margin-top: 30px;
+  padding: 40px;
+
+  &__image {
+    width: 3em;
+    height: 6em;
+    margin-right: 20px;
+  }
+  &__info {
+    flex-direction: column;
+
+    &--description {
+      margin-top: 5px;
+      max-height: 10em;
+      max-width: 10em;
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+}
