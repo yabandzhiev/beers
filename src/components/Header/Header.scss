@@ -1,3 +1,5 @@
+@import "../../constants/variables.scss";
+
 .header {
   display: flex;
   justify-content: center;
@@ -6,13 +8,13 @@
   .header__bar {
     display: flex;
     justify-content: space-between;
-    width: 60%;
+    width: 60em;
     height: 3em;
     margin: 3em 0;
     align-items: center;
-    background-color: cyan;
+    background-color: $--color-cyan;
     padding: 0 1em;
-    color: white;
+    color: $--color-white;
     overflow: hidden;
 
     &--logo {
@@ -27,15 +29,20 @@
       align-self: stretch;
       align-items: center;
 
-      span {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        padding: 0 0.7em;
+      a {
+        align-self: stretch;
+        color: $--color-white;
+
+        span {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          padding: 0 0.7em;
+        }
 
         &.active,
         &:hover {
-          background-color: rgb(0, 202, 202);
+          background-color: $--color-hover;
         }
       }
     }
