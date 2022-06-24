@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { getAllBeersRequest } from "../../api/beerRequests";
 
+import { useBeerActionsDispatch } from "../../common/hooks/useActions";
+
 import BeerItem from "../BeerItem/BeerItem";
 
 import "./Home.scss";
 
 const Home = () => {
+  const { setNewState } = useBeerActionsDispatch();
   const [beerObj, setBeerObj] = useState({});
   useEffect(() => {
     const request = async () => {
@@ -17,6 +20,7 @@ const Home = () => {
           data.push({ id, name, description, image_url });
         }
         setBeerObj(data);
+        setNewState(data);
       }
 
       return result;
