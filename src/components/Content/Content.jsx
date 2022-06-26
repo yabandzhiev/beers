@@ -1,5 +1,5 @@
-import "./Content.scss";
 import BeerItem from "../BeerItem/BeerItem";
+import "./Content.scss";
 
 const random = () => {
   return Math.floor(Math.random() * 1138176387468176418);
