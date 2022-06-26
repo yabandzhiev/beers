@@ -1,0 +1,18 @@
+@import "../../constants/variables.scss";
+.search {
+  display: flex;
+  height: 2em;
+  justify-content: center;
+  align-items: center;
+
+  .input {
+    padding: 10px 20px;
+
+    height: 2em;
+    width: 30em;
+    border: 1px solid $--color-search-input-border-cyan-grey;
+    border-radius: 50px;
+    outline: none;
+    font-size: 0.9em;
+  }
+}
