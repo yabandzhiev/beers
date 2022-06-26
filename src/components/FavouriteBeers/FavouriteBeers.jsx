@@ -1,7 +1,10 @@
-import React from "react";
+import { useSelector } from "react-redux";
+import Content from "../Content/Content";
 
 const FavouriteBeers = () => {
-  return <div>FavouriteBeers</div>;
+  const favourites = useSelector((state) => state.beers.value.favourites);
+
+  return <Content filteredInputData={favourites} />;
 };
 
 export default FavouriteBeers;
