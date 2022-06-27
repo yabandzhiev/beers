@@ -32,7 +32,6 @@ export const fetchRandomBeer = createAsyncThunk(
   "beers/getRandomBeer",
   async () => {
     const request = await getRandomBeerRequest();
-    console.log(request);
 
     return request.data[0];
   }
@@ -121,9 +120,11 @@ export const beersSlice = createSlice({
     });
 
     builder.addCase(fetchRandomBeer.fulfilled, (state, action) => {
+      //get props from payload
       const { id, name, description, image_url } = action.payload;
+      //get favourite beers from state
       const beersFromFavourite = state.value.favourites;
-      console.log(action.payload);
+
       let data = [];
 
       let favourite = false;
@@ -134,8 +135,6 @@ export const beersSlice = createSlice({
           data[0] = beer;
         }
       }
-
-      console.log(data);
 
       return (state = {
         ...state,
