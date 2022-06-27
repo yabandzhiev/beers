@@ -14,8 +14,10 @@ const Home = () => {
   const [userInput, setUserInput] = useState("");
 
   //load data from api
+
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onInputChange = (e) => {

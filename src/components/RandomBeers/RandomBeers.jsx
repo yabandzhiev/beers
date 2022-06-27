@@ -12,6 +12,7 @@ const RandomBeers = () => {
   //dispatch action to get random beer
   useEffect(() => {
     fetchRandomBeer();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <BeerItem data={randomBeer[0]} />;
