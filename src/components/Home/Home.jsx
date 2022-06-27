@@ -22,6 +22,7 @@ const Home = () => {
     setUserInput(e.target.value);
   };
 
+  //filter the data based on user's input
   const filteredInputData = !userInput
     ? beersObj.beers
     : beersObj.beers.filter((beer) => {
