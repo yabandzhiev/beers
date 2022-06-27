@@ -8,6 +8,7 @@ import BeerItem from "../BeerItem/BeerItem";
 const RandomBeers = () => {
   const { fetchRandomBeer } = useBeerActionsDispatch();
   const randomBeer = useSelector((state) => state.beers.value.randomBeer);
+
   //dispatch action to get random beer
   useEffect(() => {
     fetchRandomBeer();
