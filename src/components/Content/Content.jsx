@@ -1,4 +1,5 @@
 import BeerItem from "../BeerItem/BeerItem";
+
 import "./Content.scss";
 
 const random = () => {
