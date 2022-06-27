@@ -47,48 +47,62 @@ export const beersSlice = createSlice({
     },
 
     toggleFavourites: (state, action) => {
+      //get data from payload
       let data = action.payload;
+      //get data from state
       let dataFromState = state.value.beers;
-      let newdata = { ...data };
-      newdata.favourite = !newdata.favourite;
+      //new data object
+      let newData = { ...data };
+      newData.favourite = !newData.favourite;
 
+      //check if beer is in the state
+      //if it is - replace with the new data
       for (let beer of dataFromState) {
         if (beer.id === data.id) {
-          if (newdata.favourite === false) {
-            state.value.favourites = state.value.favourites.filter(
-              (fav) => fav.id !== beer.id
-            );
-          } else {
-            state.value.favourites.push(newdata);
-          }
-
           const index = dataFromState.indexOf(beer);
-          state.value.beers.splice(index, 1, newdata);
-          state.value.randomBeer[0] = newdata;
-          return;
+          state.value.beers.splice(index, 1, newData);
         }
       }
-      if (newdata.favourite === false) {
+      //check if new data's favourite is false
+      //if it is - remove the beer from favourites state
+      //if it is true - add the beer to the favourites state
+      if (newData.favourite === false) {
         state.value.favourites = state.value.favourites.filter(
-          (fav) => fav.id !== newdata.id
+          (fav) => fav.id !== newData.id
         );
       } else {
-        state.value.favourites.push(newdata);
+        state.value.favourites.push(newData);
       }
-      state.value.randomBeer[0] = newdata;
+      //replace randomBeer with newData's props, so it can render the changes
+      state.value.randomBeer[0] = newData;
     },
   },
 
   extraReducers: (builder) => {
+    //Fetch data pending
+    builder.addCase(fetchData.pending, (state, action) => {
+      return (state = {
+        ...state,
+        value: {
+          beers: state.value.beers,
+          randomBeer: state.value.randomBeer,
+          favourites: state.value.favourites,
+        },
+      });
+    });
+
+    //Fetch data fulfilled
     builder.addCase(fetchData.fulfilled, (state, action) => {
+      //get data from payload
       const dataFromReq = action.payload;
+      //get data from state
       const dataFromState = state.value.beers;
 
+      //every time we make a request to the api, we get raw data, so in order to keep our favourites displayed on load, we are replacing every beer's(from the request) favourite prop with what we have in the state,
       for (let beerFromReq of dataFromReq) {
         for (let beerFromState of dataFromState) {
           if (beerFromState.id === beerFromReq.id) {
-            const index = dataFromReq.indexOf(beerFromReq);
-            dataFromReq.splice(index, 1, beerFromState);
+            beerFromReq.favourite = beerFromState.favourite;
           }
         }
       }
@@ -101,6 +115,8 @@ export const beersSlice = createSlice({
         },
       });
     });
+
+    //Fetch random beer pending
     builder.addCase(fetchRandomBeer.pending, (state, action) => {
       const obj = {
         id: "",
@@ -118,7 +134,7 @@ export const beersSlice = createSlice({
         },
       });
     });
-
+    //Fetch random beer fulfilled
     builder.addCase(fetchRandomBeer.fulfilled, (state, action) => {
       //get props from payload
       const { id, name, description, image_url } = action.payload;
@@ -129,7 +145,10 @@ export const beersSlice = createSlice({
 
       let favourite = false;
 
+      //add favourite prop to the data
       data[0] = { id, name, description, image_url, favourite };
+
+      //check if we have the beer in our favourites state
       for (let beer of beersFromFavourite) {
         if (beer.id === id) {
           data[0] = beer;
