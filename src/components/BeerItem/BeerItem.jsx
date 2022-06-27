@@ -11,7 +11,7 @@ const BeerItem = ({ data }) => {
 
   return (
     <div className="beer-item">
-      <img className="beer-item__image" src={image_url} alt="Beer Image" />
+      <img className="beer-item__image" src={image_url} alt="Beer" />
 
       <FavouriteButton favourite={favourite} data={data} />
 
