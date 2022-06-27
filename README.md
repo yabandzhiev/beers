@@ -1,4 +1,4 @@
-# Getting Started with Beers App
+# Beers App
 
 ## Available Scripts
 
