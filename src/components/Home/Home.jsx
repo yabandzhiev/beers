@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useDeferredValue, useRef } from "react";
 import { useSelector } from "react-redux";
+import { getBeerFromSearchRequest } from "../../api/beerRequests";
+import useDebounce from "../../common/hooks/useDebounce";
 
 import { useBeerActionsDispatch } from "../../common/hooks/useActions";
 
@@ -9,33 +11,39 @@ import SearchBox from "../SearchBox/SearchBox";
 import "./Home.scss";
 
 const Home = () => {
-  const { fetchData } = useBeerActionsDispatch();
+  const { fetchData, setNewState } = useBeerActionsDispatch();
   const beersObj = useSelector((state) => state.beers.value);
   const [userInput, setUserInput] = useState("");
+  const [filteredInputData, setFilteredInputData] = useState(beersObj.beers);
+  const debouncedSearch = useDebounce(userInput, 300);
 
   //load data from api
 
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [!userInput]);
+
+  //debounce search useEffect
+  //filter the data based on user's input
+  useEffect(() => {
+    if (debouncedSearch) {
+      getBeerFromSearchRequest(debouncedSearch).then((result) => {
+        setNewState(result.data);
+        setFilteredInputData(result.data);
+      });
+    }
+  }, [debouncedSearch]);
 
   const onInputChange = (e) => {
     setUserInput(e.target.value);
   };
 
-  //filter the data based on user's input
-  const filteredInputData = !userInput
-    ? beersObj.beers
-    : beersObj.beers.filter((beer) => {
-        return beer.name.toLowerCase().includes(userInput.toLowerCase());
-      });
-
   return (
     <div className="home">
       <SearchBox userInput={userInput} handler={onInputChange} />
 
-      <Content filteredInputData={filteredInputData} />
+      <Content filteredInputData={beersObj.beers} />
     </div>
   );
 };
