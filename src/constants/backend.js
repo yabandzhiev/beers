@@ -8,4 +8,4 @@ const SEARCH_BEER = "?beer_name=";
 
 const axios = Axios.create({ baseURL: BASE_URL });
 
-export { axios, GET_RANDOM_BEER };
+export { axios, GET_RANDOM_BEER, SEARCH_BEER };
