@@ -1,32 +1,22 @@
 @import "../../constants/variables.scss";
 .search {
   display: flex;
-  height: 3em;
+  height: 2em;
   justify-content: center;
   align-items: center;
 
   & input {
-    padding: 10px 20px;
+    padding: 8px 18px;
 
-    height: 55%;
+    height: 100%;
     width: 30em;
     border: 1px solid $--color-search-input-border-cyan-grey;
-    border-radius: 10px 0 0 10px;
+    border-radius: 10px;
     outline: none;
     font-size: 0.9em;
-  }
-  & button {
-    height: 100%;
-    min-width: 4em;
-    width: 6em;
-    border: none;
-    border-radius: 0 10px 10px 0;
-    background-color: $--color-search-button-blue;
-    color: $--color-white;
-    cursor: pointer;
 
-    &:hover {
-      background-color: $--color-hover-button;
+    &:focus {
+      border-color: $--color-search-input-focus-border-dark-cyan-grey;
     }
   }
 }

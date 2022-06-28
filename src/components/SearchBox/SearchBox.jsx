@@ -11,7 +11,6 @@ const SearchBox = ({ userInput, handler }) => {
         value={userInput}
         onChange={handler}
       />
-      <button className="search__button">Search</button>
     </div>
   );
 };
