@@ -5,11 +5,11 @@ import "./Content.scss";
 const Content = ({ filteredInputData }) => {
   return (
     <div className="content">
-      {filteredInputData
+      {filteredInputData.length > 0
         ? filteredInputData.map((beer, index) => (
             <BeerItem key={beer.name + index} data={beer} />
           ))
-        : "No data"}
+        : "No Beers"}
     </div>
   );
 };
