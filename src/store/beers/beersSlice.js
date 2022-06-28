@@ -43,7 +43,19 @@ export const beersSlice = createSlice({
 
   reducers: {
     setNewState: (state, action) => {
-      state.value.beers = action.payload;
+      //make new state with the beers from the search criteria
+      let data = [];
+      for (let beer of action.payload) {
+        const { id, name, description, image_url } = beer;
+        let favourite = false;
+        for (let favBeer of state.value.favourites) {
+          if (favBeer.id === id) {
+            favourite = true;
+          }
+        }
+        data.push({ id, name, description, image_url, favourite });
+      }
+      state.value.beers = data;
     },
 
     toggleFavourites: (state, action) => {
@@ -51,8 +63,12 @@ export const beersSlice = createSlice({
       let data = action.payload;
       //get data from state
       let dataFromState = state.value.beers;
+
+      const { id, name, description, image_url, favourite } = data;
       //new data object
-      let newData = { ...data };
+      let newData = { id, name, description, image_url, favourite };
+
+      //toggle favourite
       newData.favourite = !newData.favourite;
 
       //check if beer is in the state
@@ -60,7 +76,7 @@ export const beersSlice = createSlice({
       for (let beer of dataFromState) {
         if (beer.id === data.id) {
           const index = dataFromState.indexOf(beer);
-          state.value.beers.splice(index, 1, newData);
+          dataFromState.splice(index, 1, newData);
         }
       }
       //check if new data's favourite is false
