@@ -1,6 +1,6 @@
 import useSound from "use-sound";
 
-import beerSound from "../../common/sound/opening-beer-can.mp3";
+import beerSound from "../../common/sound/can-open-3.mp3";
 
 import FavouriteButton from "./FavouriteButton/FavouriteButton";
 
