@@ -1,4 +1,4 @@
-import { axios, GET_RANDOM_BEER } from "../constants/backend";
+import { axios, GET_RANDOM_BEER, SEARCH_BEER } from "../constants/backend";
 
 const getAllBeersRequest = async () => {
   try {
@@ -18,4 +18,14 @@ const getRandomBeerRequest = async () => {
   }
 };
 
-export { getAllBeersRequest, getRandomBeerRequest };
+const getBeerFromSearchRequest = async (input) => {
+  const formattedInput = input.replaceAll(" ", "_");
+  try {
+    const beerFromSearch = await axios.get(`${SEARCH_BEER}${formattedInput}`);
+    return beerFromSearch;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export { getAllBeersRequest, getRandomBeerRequest, getBeerFromSearchRequest };
