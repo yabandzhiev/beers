@@ -5,7 +5,9 @@ const getAllBeersRequest = async () => {
     const beersData = await axios.get(`/`);
     return beersData;
   } catch (error) {
-    console.log(error.message);
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
   }
 };
 
@@ -14,17 +16,22 @@ const getRandomBeerRequest = async () => {
     const randomBeerData = await axios.get(`${GET_RANDOM_BEER}`);
     return randomBeerData;
   } catch (error) {
-    console.log(error.message);
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
   }
 };
 
-const getBeerFromSearchRequest = async (input) => {
+const getBeerFromSearchRequest = async (input: string) => {
   const formattedInput = input.replaceAll(" ", "_");
   try {
     const beerFromSearch = await axios.get(`${SEARCH_BEER}${formattedInput}`);
+    console.log(beerFromSearch);
     return beerFromSearch;
   } catch (error) {
-    console.log(error.message);
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
   }
 };
 
