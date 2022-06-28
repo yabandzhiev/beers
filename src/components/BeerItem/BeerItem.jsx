@@ -1,3 +1,7 @@
+import useSound from "use-sound";
+
+import beerSound from "../../common/sound/opening-beer-can.mp3";
+
 import FavouriteButton from "./FavouriteButton/FavouriteButton";
 
 import "./BeerItem.scss";
@@ -9,10 +13,16 @@ const BeerItem = ({ data }) => {
   const image_url = data?.image_url;
   const favourite = data?.favourite;
 
+  const [play] = useSound(beerSound);
+
   return (
     <div className="beer-item">
-      <img className="beer-item__image" src={image_url} alt="Beer" />
-
+      <img
+        className="beer-item__image"
+        src={image_url}
+        alt="Beer"
+        onClick={play}
+      />
       <FavouriteButton favourite={favourite} data={data} />
 
       <div className="beer-item__info">
