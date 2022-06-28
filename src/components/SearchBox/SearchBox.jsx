@@ -6,11 +6,12 @@ const SearchBox = ({ userInput, handler }) => {
       <input
         type="text"
         name="search"
-        className="input"
+        className="search__input"
         placeholder="Search for a beer..."
         value={userInput}
         onChange={handler}
       />
+      <button className="search__button">Search</button>
     </div>
   );
 };
