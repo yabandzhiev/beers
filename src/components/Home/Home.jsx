@@ -1,4 +1,4 @@
-import { useEffect, useState, useDeferredValue, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getBeerFromSearchRequest } from "../../api/beerRequests";
 import useDebounce from "../../common/hooks/useDebounce";
@@ -14,7 +14,6 @@ const Home = () => {
   const { fetchData, setNewState } = useBeerActionsDispatch();
   const beersObj = useSelector((state) => state.beers.value);
   const [userInput, setUserInput] = useState("");
-  const [filteredInputData, setFilteredInputData] = useState(beersObj.beers);
   const debouncedSearch = useDebounce(userInput, 300);
 
   //load data from api
@@ -30,9 +29,9 @@ const Home = () => {
     if (debouncedSearch) {
       getBeerFromSearchRequest(debouncedSearch).then((result) => {
         setNewState(result.data);
-        setFilteredInputData(result.data);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearch]);
 
   const onInputChange = (e) => {
