@@ -2,15 +2,17 @@ import { useBeerActionsDispatch } from "../../../common/hooks/useActions";
 
 import "./FavouriteButton.scss";
 
-const FavouriteButton = ({ favourite, data }) => {
+import { beerProps } from "../types/beerType";
+
+const FavouriteButton = ({ beer }: beerProps) => {
   const { toggleFavourites } = useBeerActionsDispatch();
 
   const toggleFav = () => {
-    toggleFavourites(data);
+    toggleFavourites(beer);
   };
   return (
     <>
-      {favourite ? (
+      {beer?.favourite ? (
         <span className="star" onClick={toggleFav}>
           &#x2605;
         </span>

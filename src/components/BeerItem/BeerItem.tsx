@@ -1,17 +1,18 @@
 import useSound from "use-sound";
 
-import beerSound from "../../common/sound/can-open-3.mp3";
+import beerSound from "../../assets/sound/can-open-3.mp3";
 
 import FavouriteButton from "./FavouriteButton/FavouriteButton";
 
 import "./BeerItem.scss";
 
-const BeerItem = ({ data }) => {
+import { beerProps } from "./types/beerType";
+
+const BeerItem = ({ beer }: beerProps) => {
   //get all props separately with "?" otherwise it throws error at random beers page
-  const name = data?.name;
-  const description = data?.description;
-  const image_url = data?.image_url;
-  const favourite = data?.favourite;
+  const name = beer?.name;
+  const description = beer?.description;
+  const image_url = beer?.image_url;
 
   const [play] = useSound(beerSound);
 
@@ -21,9 +22,9 @@ const BeerItem = ({ data }) => {
         className="beer-item__image"
         src={image_url}
         alt="Beer"
-        onClick={play}
+        onClick={() => play()}
       />
-      <FavouriteButton favourite={favourite} data={data} />
+      <FavouriteButton beer={beer} />
 
       <div className="beer-item__info">
         <h4 className="beer-item__info--title">{name}</h4>

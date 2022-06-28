@@ -15,7 +15,7 @@ const RandomBeers = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <BeerItem data={randomBeer[0]} />;
+  return <BeerItem beer={randomBeer[0]} />;
 };
 
 export default RandomBeers;
