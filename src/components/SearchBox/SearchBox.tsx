@@ -1,6 +1,8 @@
 import "./SearchBox.scss";
 
-const SearchBox = ({ userInput, handler }) => {
+import { searchTypes } from "./types/searchTypes";
+
+const SearchBox = ({ userInput, handler }: searchTypes) => {
   return (
     <div className="search">
       <input

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 
 import { useBeerActionsDispatch } from "../../common/hooks/useActions";
+import { useSelector } from "../../store/store";
 
 import BeerItem from "../BeerItem/BeerItem";
 

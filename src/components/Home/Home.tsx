@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "../../store/store";
 import { getBeerFromSearchRequest } from "../../api/beerRequests";
 import useDebounce from "../../common/hooks/useDebounce";
 
 import { useBeerActionsDispatch } from "../../common/hooks/useActions";
+import { RootState } from "../../store/store";
 
 import Content from "../Content/Content";
 import SearchBox from "../SearchBox/SearchBox";
@@ -28,13 +29,13 @@ const Home = () => {
   useEffect(() => {
     if (debouncedSearch) {
       getBeerFromSearchRequest(debouncedSearch).then((result) => {
-        setNewState(result.data);
+        setNewState(result?.data);
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearch]);
 
-  const onInputChange = (e) => {
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
   };
 

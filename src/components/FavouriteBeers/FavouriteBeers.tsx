@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "../../store/store";
 
 import Content from "../Content/Content";
 

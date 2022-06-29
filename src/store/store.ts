@@ -1,4 +1,8 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import {
+  useSelector as rawUseSelector,
+  TypedUseSelectorHook,
+} from "react-redux";
 import logger from "redux-logger";
 import {
   persistStore,
@@ -35,4 +39,6 @@ export const store = configureStore({
     }).concat(logger),
 });
 
+export type RootState = ReturnType<typeof store.getState>;
+export const useSelector: TypedUseSelectorHook<RootState> = rawUseSelector;
 export const persistor = persistStore(store);
