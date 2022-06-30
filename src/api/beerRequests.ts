@@ -26,7 +26,6 @@ const getBeerFromSearchRequest = async (input: string) => {
   const formattedInput = input.replaceAll(" ", "_");
   try {
     const beerFromSearch = await axios.get(`${SEARCH_BEER}${formattedInput}`);
-    console.log(beerFromSearch);
     return beerFromSearch;
   } catch (error) {
     if (error instanceof Error) {
