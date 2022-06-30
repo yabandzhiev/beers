@@ -7,6 +7,7 @@ import RandomBeers from "./components/RandomBeers/RandomBeers";
 import FavouriteBeers from "./components/FavouriteBeers/FavouriteBeers";
 
 import "./App.scss";
+import AuthRouteGuard from "./common/RoutesGuard/AuthRouteGuard";
 
 const App = () => {
   return (
@@ -14,9 +15,11 @@ const App = () => {
       <Header />
 
       <Routes>
-        <Route index element={<Home />} />
-        <Route path="random" element={<RandomBeers />} />
-        <Route path="favourites" element={<FavouriteBeers />} />
+        <Route element={<AuthRouteGuard />}>
+          <Route index element={<Home />} />
+          <Route path="random" element={<RandomBeers />} />
+          <Route path="favourites" element={<FavouriteBeers />} />
+        </Route>
       </Routes>
     </div>
   );

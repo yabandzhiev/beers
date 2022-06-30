@@ -1,24 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
+
 import { useSelector } from "../../store/store";
 import { getBeerFromSearchRequest } from "../../api/beerRequests";
 import useDebounce from "../../common/hooks/useDebounce";
 
-import { useBeerActionsDispatch } from "../../common/hooks/useActions";
-import { RootState } from "../../store/store";
+import {
+  useBeerActionsDispatch,
+  useUserActionsDispatch,
+} from "../../common/hooks/useActions";
 
 import Content from "../Content/Content";
 import SearchBox from "../SearchBox/SearchBox";
+import Metamask from "../Metamask/Metamask";
+
+import { homeProps } from "./types/homeTypes";
 
 import "./Home.scss";
 
-const Home = () => {
+const Home: FC<homeProps> = ({ locked }) => {
+  const { logOutUser } = useUserActionsDispatch();
   const { fetchData, setNewState } = useBeerActionsDispatch();
   const beersObj = useSelector((state) => state.beers.value);
   const [userInput, setUserInput] = useState("");
   const debouncedSearch = useDebounce(userInput, 300);
 
   //load data from api
-
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,11 +45,25 @@ const Home = () => {
     setUserInput(e.target.value);
   };
 
+  const handleLogout = () => {
+    logOutUser();
+  };
+
   return (
     <div className="home">
-      <SearchBox userInput={userInput} handler={onInputChange} />
+      {locked ? (
+        <Metamask locked={locked} />
+      ) : (
+        <>
+          <button className="logoutButton" onClick={handleLogout}>
+            Logout from Metamask
+          </button>
 
-      <Content filteredInputData={beersObj.beers} />
+          <SearchBox userInput={userInput} handler={onInputChange} />
+
+          <Content filteredInputData={beersObj.beers} />
+        </>
+      )}
     </div>
   );
 };

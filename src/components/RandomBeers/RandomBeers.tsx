@@ -5,6 +5,8 @@ import { useSelector } from "../../store/store";
 
 import BeerItem from "../BeerItem/BeerItem";
 
+import "./RandomBeer.scss";
+
 const RandomBeers = () => {
   const { fetchRandomBeer } = useBeerActionsDispatch();
   const randomBeer = useSelector((state) => state.beers.value.randomBeer);
@@ -15,7 +17,11 @@ const RandomBeers = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <BeerItem beer={randomBeer[0]} />;
+  return (
+    <div className="randomBeer">
+      <BeerItem beer={randomBeer[0]} />
+    </div>
+  );
 };
 
 export default RandomBeers;
