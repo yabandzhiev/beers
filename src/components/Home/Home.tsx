@@ -4,10 +4,7 @@ import { useSelector } from "../../store/store";
 import { getBeerFromSearchRequest } from "../../api/beerRequests";
 import useDebounce from "../../common/hooks/useDebounce";
 
-import {
-  useBeerActionsDispatch,
-  useUserActionsDispatch,
-} from "../../common/hooks/useActions";
+import { useBeerActionsDispatch } from "../../common/hooks/useActions";
 
 import Content from "../Content/Content";
 import SearchBox from "../SearchBox/SearchBox";
@@ -16,17 +13,21 @@ import Metamask from "../Metamask/Metamask";
 import { homeProps } from "./types/homeTypes";
 
 import "./Home.scss";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 const Home: FC<homeProps> = ({ locked }) => {
-  const { logOutUser } = useUserActionsDispatch();
   const { fetchData, setNewState } = useBeerActionsDispatch();
+
   const beersObj = useSelector((state) => state.beers.value);
   const [userInput, setUserInput] = useState("");
+
   const debouncedSearch = useDebounce(userInput, 300);
 
   //load data from api
   useEffect(() => {
-    fetchData();
+    if (!locked) {
+      fetchData();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [!userInput]);
 
@@ -45,19 +46,13 @@ const Home: FC<homeProps> = ({ locked }) => {
     setUserInput(e.target.value);
   };
 
-  const handleLogout = () => {
-    logOutUser();
-  };
-
   return (
     <div className="home">
       {locked ? (
         <Metamask locked={locked} />
       ) : (
         <>
-          <button className="logoutButton" onClick={handleLogout}>
-            Logout from Metamask
-          </button>
+          <LogoutButton />
 
           <SearchBox userInput={userInput} handler={onInputChange} />
 
