@@ -1,3 +1,5 @@
+@import "../../../constants/variables.scss";
+
 .star {
   position: absolute;
   top: 1rem;
@@ -11,6 +13,6 @@
   top: 1rem;
   right: 1.5rem;
   font-size: 1.3em;
-  color: rgb(58, 223, 223);
+  color: $--color-favourite-star-cyan;
   cursor: pointer;
 }
