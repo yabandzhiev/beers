@@ -8,7 +8,10 @@ import BeerItem from "../BeerItem/BeerItem";
 import "./RandomBeer.scss";
 
 const RandomBeers = () => {
+  //get random beer from api and save it to state
   const { fetchRandomBeer } = useBeerActionsDispatch();
+
+  //get the random beer from state
   const randomBeer = useSelector((state) => state.beers.value.randomBeer);
 
   //dispatch action to get random beer
