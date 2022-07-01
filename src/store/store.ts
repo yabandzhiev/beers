@@ -3,7 +3,6 @@ import {
   useSelector as rawUseSelector,
   TypedUseSelectorHook,
 } from "react-redux";
-import logger from "redux-logger";
 import {
   persistStore,
   persistReducer,
@@ -15,6 +14,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import logger from "redux-logger";
 
 import beersReducer from "./beers/beersSlice";
 import userReducer from "./user/userSlice";
