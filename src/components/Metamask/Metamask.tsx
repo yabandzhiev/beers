@@ -10,12 +10,15 @@ import "./Metamask.scss";
 
 const Metamask: FC<metamaskProps> = ({ locked }) => {
   const { logInUser } = useUserActionsDispatch();
-  //login with Metamask logic
+
+  //login with Metamask
   const handleLogin = async () => {
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
+
     const account = accounts[0];
+
     if (account) {
       logInUser(account);
     }
