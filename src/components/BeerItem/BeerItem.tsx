@@ -14,6 +14,7 @@ const BeerItem = ({ beer }: beerProps) => {
   const description = beer?.description;
   const image_url = beer?.image_url;
 
+  //play beer sound on image click
   const [play] = useSound(beerSound);
 
   return (
@@ -24,6 +25,7 @@ const BeerItem = ({ beer }: beerProps) => {
         alt="Beer"
         onClick={() => play()}
       />
+
       <FavouriteButton beer={beer} />
 
       <div className="beer-item__info">
