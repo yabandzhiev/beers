@@ -7,6 +7,7 @@ import FavouriteBeers from "./components/FavouriteBeers/FavouriteBeers";
 
 import "./App.scss";
 import AuthRouteGuard from "./common/RoutesGuard/AuthRouteGuard";
+import ErrorPage from "./components/ErrorPage/ErrorPage";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="random" element={<RandomBeers />} />
           <Route path="favourites" element={<FavouriteBeers />} />
         </Route>
+        <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </div>
   );
