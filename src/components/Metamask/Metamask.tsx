@@ -1,5 +1,5 @@
 import { Button, Modal } from "antd";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import { useUserActionsDispatch } from "../../common/hooks/useActions";
 
@@ -10,32 +10,53 @@ import "./Metamask.scss";
 
 const Metamask: FC<metamaskProps> = ({ locked }) => {
   const { logInUser } = useUserActionsDispatch();
+  const [error, setError] = useState(false);
 
   //login with Metamask
   const handleLogin = async () => {
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
+    try {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
 
-    const account = accounts[0];
+      const account = accounts[0];
 
-    if (account) {
-      logInUser(account);
+      if (account) {
+        logInUser(account);
+      }
+    } catch (error) {
+      setError(true);
     }
   };
 
+  const errorModal = () => {
+    Modal.error({
+      title: "Something went wrong",
+      content: "Check if your Metamask wallet is on",
+      onOk() {
+        setError(false);
+      },
+    });
+  };
+
   return (
-    <Modal
-      title="Log In with Metamask"
-      visible={locked}
-      footer={[
-        <Button key="submit" type="primary" onClick={handleLogin}>
-          Login
-        </Button>,
-      ]}
-    >
-      <p>Please Log In with your Metamask wallet first.</p>
-    </Modal>
+    <>
+      {!error ? (
+        <Modal
+          title="Log In with Metamask"
+          visible={locked}
+          footer={[
+            <Button key="submit" type="primary" onClick={handleLogin}>
+              Login
+            </Button>,
+          ]}
+        >
+          <p>Please Log In with your Metamask wallet first.</p>
+        </Modal>
+      ) : (
+        errorModal()
+      )}
+    </>
   );
 };
 
