@@ -2,9 +2,9 @@ export type beerProps = {
   name: string;
   description: string;
   image_url: string;
-  favourite: boolean;
+  favorite: boolean;
 };
 
 export type dataProps = {
-  filteredInputData: beerProps[];
+  filteredData: beerProps[];
 };
