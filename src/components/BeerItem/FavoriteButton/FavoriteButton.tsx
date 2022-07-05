@@ -1,18 +1,18 @@
 import { useBeerActionsDispatch } from "../../../common/hooks/useActions";
 
-import "./FavouriteButton.scss";
+import "./FavoriteButton.scss";
 
 import { beerProps } from "../types/beerType";
 
-const FavouriteButton = ({ beer }: beerProps) => {
-  const { toggleFavourites } = useBeerActionsDispatch();
+const FavoriteButton = ({ beer }: beerProps) => {
+  const { toggleFavorites } = useBeerActionsDispatch();
 
   const toggleFav = () => {
-    toggleFavourites(beer);
+    toggleFavorites(beer);
   };
   return (
     <>
-      {beer?.favourite ? (
+      {beer?.favorite ? (
         <span className="star" onClick={toggleFav}>
           &#x2605;
         </span>
@@ -25,4 +25,4 @@ const FavouriteButton = ({ beer }: beerProps) => {
   );
 };
 
-export default FavouriteButton;
+export default FavoriteButton;
