@@ -1,0 +1,11 @@
+.beer-item__image {
+  width: 3em;
+  height: 8em;
+  margin-right: 20px;
+
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.3);
+  }
+}
