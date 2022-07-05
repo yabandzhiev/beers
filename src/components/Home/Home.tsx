@@ -16,7 +16,7 @@ import "./Home.scss";
 import LogoutButton from "../LogoutButton/LogoutButton";
 
 const Home: FC<homeProps> = ({ locked }) => {
-  const { fetchData, setNewState } = useBeerActionsDispatch();
+  const { fetchData, setNewSearchState } = useBeerActionsDispatch();
 
   const beersObj = useSelector((state) => state.beers.value);
   const [userInput, setUserInput] = useState("");
@@ -36,7 +36,7 @@ const Home: FC<homeProps> = ({ locked }) => {
   useEffect(() => {
     if (debouncedSearch) {
       getBeerFromSearchRequest(debouncedSearch).then((result) => {
-        setNewState(result?.data);
+        setNewSearchState(result?.data);
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,7 +56,11 @@ const Home: FC<homeProps> = ({ locked }) => {
 
           <SearchBox userInput={userInput} handler={onInputChange} />
 
-          <Content filteredInputData={beersObj.beers} />
+          {!userInput ? (
+            <Content filteredData={beersObj.beers} />
+          ) : (
+            <Content filteredData={beersObj.search} />
+          )}
         </>
       )}
     </div>

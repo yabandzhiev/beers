@@ -17,7 +17,7 @@ const Header = () => {
               <span>Home</span>
             </NavLink>
 
-            <NavLink to="favourites">
+            <NavLink to="favorites">
               <span>Favorites</span>
             </NavLink>
 
