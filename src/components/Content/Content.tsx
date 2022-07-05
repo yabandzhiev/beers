@@ -4,11 +4,11 @@ import BeerItem from "../BeerItem/BeerItem";
 
 import "./Content.scss";
 
-const Content = ({ filteredInputData }: dataProps) => {
+const Content = ({ filteredData }: dataProps) => {
   return (
     <div className="content">
-      {filteredInputData.length > 0
-        ? filteredInputData.map((beer: beerProps, index: number) => (
+      {filteredData.length > 0
+        ? filteredData.map((beer: beerProps, index: number) => (
             <BeerItem key={beer.name + index} beer={beer} />
           ))
         : "No Beers"}
