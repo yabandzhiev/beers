@@ -2,10 +2,10 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "@reduxjs/toolkit";
 
 import {
-  setNewState,
+  setNewSearchState,
   fetchData,
   fetchRandomBeer,
-  toggleFavourites,
+  toggleFavorites,
 } from "../../store/beers/beersSlice";
 
 import { logInUser, logOutUser } from "../../store/user/userSlice";
@@ -13,7 +13,7 @@ import { logInUser, logOutUser } from "../../store/user/userSlice";
 export const useBeerActionsDispatch = () => {
   const dispatch = useDispatch();
   return bindActionCreators(
-    { setNewState, fetchData, fetchRandomBeer, toggleFavourites },
+    { setNewSearchState, fetchData, fetchRandomBeer, toggleFavorites },
     dispatch
   );
 };
