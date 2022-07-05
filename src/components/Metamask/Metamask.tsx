@@ -5,12 +5,18 @@ import { useUserActionsDispatch } from "../../common/hooks/useActions";
 
 import { metamaskProps } from "./types/metamaskTypes";
 
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import "./Metamask.scss";
 
 const Metamask: FC<metamaskProps> = ({ locked }) => {
-  const { logInUser } = useUserActionsDispatch();
+  const { logInUser, logOutUser } = useUserActionsDispatch();
   const [error, setError] = useState(false);
+
+  window.ethereum.on("accountsChanged", (accounts: []) => {
+    if (!accounts.length) {
+      logOutUser();
+    }
+  });
 
   //login with Metamask
   const handleLogin = async () => {
@@ -45,6 +51,7 @@ const Metamask: FC<metamaskProps> = ({ locked }) => {
         <Modal
           title="Log In with Metamask"
           visible={locked}
+          closable={false}
           footer={[
             <Button key="submit" type="primary" onClick={handleLogin}>
               Login
