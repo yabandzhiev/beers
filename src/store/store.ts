@@ -22,7 +22,7 @@ import userReducer from "./user/userSlice";
 const persistConfig = {
   key: "root",
   storage,
-  // blacklist: ["beers", "favorites", "favourites", "value", "search"],
+  // blacklist: ["beers", "favorites", "value", "search"],
 };
 
 const rootReducer = combineReducers({
